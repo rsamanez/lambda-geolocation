@@ -1,0 +1,18 @@
+custom:
+  secrets: ${file(.secrets.json)}
+
+service: geolocation
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  environment:
+    GOOGLE_MAPS_APIKEY: ${self:custom.secrets.GOOGLE_MAPS_APIKEY}
+
+functions:
+  coordinates:
+    handler: index.handler
+
+plugins:
+  - serverless-offline
