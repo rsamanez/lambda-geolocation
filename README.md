@@ -1,20 +1,8 @@
-<!--
-title: 'AWS NodeJS Example'
-description: 'This template demonstrates how to deploy a NodeJS function running on AWS Lambda using the traditional Serverless Framework.'
-layout: Doc
-framework: v3
-platform: AWS
-language: nodeJS
-priority: 1
-authorLink: 'https://github.com/serverless'
-authorName: 'Serverless, inc.'
-authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
--->
 
+# Serverless Framework AWS NodeJS
 
-# Serverless Framework AWS NodeJS Example
+This function is to get Geolocation Coordinates using GoogleMaps API
 
-This template demonstrates how to deploy a NodeJS function running on AWS Lambda using the traditional Serverless Framework. The deployed function does not include any event definitions as well as any kind of persistence (database). For more advanced configurations check out the [examples repo](https://github.com/serverless/examples/) which includes integrations with SQS, DynamoDB or examples of functions that are triggered in `cron`-like manner. For details about configuration of specific `events`, please refer to our [documentation](https://www.serverless.com/framework/docs/providers/aws/events/).
 
 ## Usage
 
@@ -29,12 +17,12 @@ $ serverless deploy
 After running deploy, you should see output similar to:
 
 ```bash
-Deploying aws-node-project to stage dev (us-east-1)
+Deploying geolocation-dev to stage dev (us-east-1)
 
-✔ Service deployed to stack aws-node-project-dev (112s)
+✔ Service deployed to stack geolocation-dev (112s)
 
 functions:
-  hello: aws-node-project-dev-hello (1.5 kB)
+  coordinates: geolocation-dev-coordinates (1.5 kB)
 ```
 
 ### Invocation
@@ -42,15 +30,15 @@ functions:
 After successful deployment, you can invoke the deployed function by using the following command:
 
 ```bash
-serverless invoke --function hello
+serverless invoke --function coordinates --data '{ "address1": "337 20th St","address2": "","city": "Miami Beach","state": "FL","postalCode": "33139"}'
 ```
 
 Which should result in response similar to the following:
 
 ```json
 {
-    "statusCode": 200,
-    "body": "{\n  \"message\": \"Go Serverless v3.0! Your function executed successfully!\",\n  \"input\": {}\n}"
+    "lat": 25.7962812,
+    "lng": -80.1307368
 }
 ```
 
@@ -59,14 +47,14 @@ Which should result in response similar to the following:
 You can invoke your function locally by using the following command:
 
 ```bash
-serverless invoke local --function hello
+serverless invoke local --function coordinates --data '{ "address1": "337 20th St","address2": "","city": "Miami Beach","state": "FL","postalCode": "33139"}'
 ```
 
 Which should result in response similar to the following:
 
 ```
 {
-    "statusCode": 200,
-    "body": "{\n  \"message\": \"Go Serverless v3.0! Your function executed successfully!\",\n  \"input\": \"\"\n}"
+    "lat": 25.7962812,
+    "lng": -80.1307368
 }
 ```
